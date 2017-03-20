@@ -54,23 +54,34 @@ int main(void)
 			switch(lists)
 			{
 			case 0:
+				printf("Generating %d random numbers between [%d, %d] for %s ...\n", SMALL_AMOUNT, MIN_VALUE, MAX_VALUE, filename);
 				generate_rand_numbers(files[i], SMALL_AMOUNT);
 				break;
 			case 1:
+				printf("Generating %d random numbers between [%d, %d] for %s ...\n", MEDIUM_AMOUNT, MIN_VALUE, MAX_VALUE, filename);
 				generate_rand_numbers(files[i], MEDIUM_AMOUNT);
 				break;
 			case 2:
+				printf("Generating %d random numbers between [%d, %d] for %s ...\n", LARGE_AMOUNT, MIN_VALUE, MAX_VALUE, filename);
 				generate_rand_numbers(files[i], LARGE_AMOUNT);
+				break;
 			}
+
+			fclose(files[i]);
 		}
 	}
 
+	printf("\nDONE\n");
 	return 0;
 }
 
+/**
+ * generates random numbers for the file [MIN_VALUE, MAX_VALUE] for the amount_to_generate
+ *
+ * inputs are space delimited
+ */
 void generate_rand_numbers(FILE *file, int amount_to_generate)
 {
-	printf("Amount to generate -> %d\n", amount_to_generate);
 	int i;
 	for(i = 0; i < amount_to_generate; i++)
 	{
