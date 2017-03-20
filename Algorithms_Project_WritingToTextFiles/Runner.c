@@ -45,7 +45,7 @@ int main(void)
 			/* if file already exists remove it */
 			if( access(filename, F_OK) != -1)
 			{
-				int ret = remove(filename);
+				remove(filename);
 
 			}
 
