@@ -15,7 +15,7 @@
 #define MEDIUM_AMOUNT 100000
 #define LARGE_AMOUNT 1000000
 
-typedef enum {SMALL , MEDIUM, LARGE} lists;
+typedef enum {SMALL , MEDIUM, LARGE} List;
 
 
 void open_files(int associated_list);
@@ -29,7 +29,10 @@ int main(void)
     directories[2] = "../RandomData_Generation/text_files/large_list/large_random_";
 
     FILE *files[NUM_FILES];
-    int lists;
+    List list;
+    for(list = SMALL; list <= LARGE; list++)
+    {
+    }
 //    for(lists = 1; lists <= NUM_LISTS; lists++)
 //    {
 //        open_files(lists);
