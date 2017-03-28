@@ -30,13 +30,29 @@ public class Runner
 		
 		for(String key : listOfNumbers.keySet())
 		{
-			QuickSorter quickSorter = new QuickSorter();
-			
-			/* get the start index of the array and the end index */
-			int startPosition = 0;
-			int endPosition = listOfNumbers.get(key).size() -1;
-			quickSorter.quickSort(listOfNumbers.get(key), startPosition, endPosition, "results.csv");
-			break; // TODO: only want to run the first one to see results before continuing
+			if(key.contains("unsorted"))
+			{
+				QuickSorter quickSorter = new QuickSorter();
+				
+				/* get the start index of the array and the end index */
+				int lowerEnd = 0;
+				int upperEnd = listOfNumbers.get(key).size() -1;
+				
+				System.out.println("Before: ");
+				for(int i = 0; i < 20; i++)
+				{
+					System.out.print(listOfNumbers.get(key).get(i) + ", ");
+				}
+				
+				quickSorter.quickSort(listOfNumbers.get(key), lowerEnd, upperEnd, "results.csv");
+				
+				System.out.println("\nAfter: ");
+				for(int i = 0; i < 20; i++)
+				{
+					System.out.print(listOfNumbers.get(key).get(i) + ", ");
+				}
+				break; // TODO: only want to run the first one to see results before continuing
+			}
 		}
 	}
 
@@ -68,8 +84,6 @@ public class Runner
 				readFromFiles(file_path, dir);
 			}
 		}
-		
-				
 	}
 
 	/**

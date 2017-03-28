@@ -18,21 +18,20 @@ public class QuickSorter
 	 * quick sorts an array
 	 * 
 	 * @param numbersToSort
-	 * @param endPosition 
-	 * @param startPosition 
+	 * @param upperEnd 
+	 * @param lowerEnd 
 	 * @param outputFile
 	 */
-	public void quickSort(ArrayList<Integer> numbersToSort, int startPosition, int endPosition, String outputFile)
+	public void quickSort(ArrayList<Integer> numbersToSort, int lowerEnd, int upperEnd, String outputFile)
 	{
-		if(startPosition <= endPosition)
+		if(lowerEnd <= upperEnd)
 		{
 			int pivot = getPivotValue(numbersToSort);
-			paritionArray(numbersToSort, pivot, startPosition, endPosition);
+			paritionArray(numbersToSort, pivot, lowerEnd, upperEnd);
 			
-			this.quickSort(numbersToSort, startPosition, this.start, outputFile);
-			this.quickSort(numbersToSort, this.end+1, endPosition, outputFile);
-		}
-		
+			quickSort(numbersToSort, lowerEnd, this.start, outputFile);
+			quickSort(numbersToSort, this.end+1, upperEnd, outputFile);
+		}	
 	}
 
 	/**
@@ -45,37 +44,35 @@ public class QuickSorter
 	 */
 	private void paritionArray(ArrayList<Integer> numbersToSort, int pivot, int startPosition, int endPosition) 
 	{
-		this.start = startPosition-1;
-		this.end = endPosition;
-		int middle = startPosition;
+		start = 0;
+		end = 0;
+		int n = numbersToSort.size() - 1;
 		
-		while(middle < this.end)
+		while(end <= n)
 		{
-			if(numbersToSort.get(middle) < pivot)
+			if(numbersToSort.get(end) < pivot)
 			{
-				int temp  = numbersToSort.get(this.start+1);
-				numbersToSort.set((this.start+1), numbersToSort.get(middle));
-				numbersToSort.set(middle, temp);
-				this.start++;
-				middle++;
+				swap(numbersToSort, start, end);
+				start++;
+				end++;
 			}
-			else if(numbersToSort.get(middle) == pivot)
+			else if(numbersToSort.get(end) > pivot)
 			{
-				middle++;
+				swap(numbersToSort, end, n);
 			}
 			else
 			{
-				int temp = numbersToSort.get(this.end-1);
-				numbersToSort.set(this.end-1, numbersToSort.get(middle));
-				numbersToSort.set(middle, temp);
-				end--;
+				end++;
 			}
 		}
-		
-		int temp = numbersToSort.get(middle);
-		numbersToSort.set(middle, numbersToSort.get(endPosition));
-		numbersToSort.set(endPosition, temp);
-		System.out.println(this.start + " " + this.end);
+	}
+
+	/* swaps values in numbers to sort array */
+	private void swap(ArrayList<Integer> numbersToSort, int valueAtIndex1, int valueAtIndex2) 
+	{
+		int temp = numbersToSort.get(valueAtIndex1);
+		numbersToSort.set(valueAtIndex1, numbersToSort.get(valueAtIndex2));
+		numbersToSort.set(valueAtIndex2, temp);		
 	}
 
 	/**
