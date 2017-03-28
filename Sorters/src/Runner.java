@@ -31,7 +31,11 @@ public class Runner
 		for(String key : listOfNumbers.keySet())
 		{
 			QuickSorter quickSorter = new QuickSorter();
-			quickSorter.quickSort(listOfNumbers.get(key), "results.csv");
+			
+			/* get the start index of the array and the end index */
+			int startPosition = 0;
+			int endPosition = listOfNumbers.get(key).size() -1;
+			quickSorter.quickSort(listOfNumbers.get(key), startPosition, endPosition, "results.csv");
 		}
 	}
 
