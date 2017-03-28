@@ -9,7 +9,7 @@ SMALL_AMOUNT=10000
 MEDIUM_AMOUNT=100000
 LARGE_AMOUNT=1000000
 
-TEXT_DIR="./text_files"
+TEXT_DIR="./Sorters/text_files"
 
 #first run and set up the folders if they don't already exist
 ./file_checker.sh

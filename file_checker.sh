@@ -8,7 +8,7 @@ filename="text_files_dirs.txt"
 
 function checkTextFilesDirectory() {
     #first check to make sure text_files directory exists
-    TEXT_DIR="./text_files"
+    TEXT_DIR="./Sorters/text_files"
     initialCheckIfExist $TEXT_DIR
     
     while IFS='' read -r subdir || [[ -n "$subdir" ]]; do

@@ -1,10 +1,10 @@
-default: Runner
+default: quick_sort
 
-Runner.o: Runner.c
-	gcc -c -Wall Runner.c -o Runner.o
+quick_sort.o: quick_sort.c
+	gcc -c -Wall quick_sort.c -o quick_sort.o
 
 Runner: Runner.o
-	gcc Runner.o -o Runner
+	gcc quick_sort.o -o quick_sort
 
 clean:
-	-rm -f Runner.o Runner
+	-rm -f quick_sort.o quick_sort
