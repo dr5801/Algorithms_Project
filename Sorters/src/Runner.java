@@ -36,6 +36,7 @@ public class Runner
 			int startPosition = 0;
 			int endPosition = listOfNumbers.get(key).size() -1;
 			quickSorter.quickSort(listOfNumbers.get(key), startPosition, endPosition, "results.csv");
+			break; // TODO: only want to run the first one to see results before continuing
 		}
 	}
 
