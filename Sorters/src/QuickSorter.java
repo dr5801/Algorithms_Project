@@ -11,6 +11,9 @@ import java.util.Random;
  */
 public class QuickSorter 
 {
+	private int start;
+	private int end;
+	
 	/**
 	 * quick sorts an array
 	 * 
@@ -21,8 +24,14 @@ public class QuickSorter
 	 */
 	public void quickSort(ArrayList<Integer> numbersToSort, int startPosition, int endPosition, String outputFile)
 	{
-		int pivot = getPivotValue(numbersToSort);
-		paritionArray(numbersToSort, startPosition, endPosition);
+		if(startPosition <= endPosition)
+		{
+			int pivot = getPivotValue(numbersToSort);
+			paritionArray(numbersToSort, pivot, startPosition, endPosition);
+			
+			this.quickSort(numbersToSort, startPosition, this.start, outputFile);
+			this.quickSort(numbersToSort, this.end+1, endPosition, outputFile);
+		}
 		
 	}
 
@@ -32,11 +41,41 @@ public class QuickSorter
 	 * @param numbersToSort
 	 * @param startPosition
 	 * @param endPosition
+	 * @param endPosition 
 	 */
-	private void paritionArray(ArrayList<Integer> numbersToSort, int startPosition, int endPosition) 
+	private void paritionArray(ArrayList<Integer> numbersToSort, int pivot, int startPosition, int endPosition) 
 	{
-		// TODO Auto-generated method stub
+		this.start = startPosition-1;
+		this.end = endPosition;
+		int middle = startPosition;
 		
+		while(middle < this.end)
+		{
+			if(numbersToSort.get(middle) < pivot)
+			{
+				int temp  = numbersToSort.get(this.start+1);
+				numbersToSort.set((this.start+1), numbersToSort.get(middle));
+				numbersToSort.set(middle, temp);
+				this.start++;
+				middle++;
+			}
+			else if(numbersToSort.get(middle) == pivot)
+			{
+				middle++;
+			}
+			else
+			{
+				int temp = numbersToSort.get(this.end-1);
+				numbersToSort.set(this.end-1, numbersToSort.get(middle));
+				numbersToSort.set(middle, temp);
+				end--;
+			}
+		}
+		
+		int temp = numbersToSort.get(middle);
+		numbersToSort.set(middle, numbersToSort.get(endPosition));
+		numbersToSort.set(endPosition, temp);
+		System.out.println(this.start + " " + this.end);
 	}
 
 	/**
