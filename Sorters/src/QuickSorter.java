@@ -14,15 +14,11 @@ public class QuickSorter
 {
 	private static int start;
 	private static int end;
-	private String outputFile;
 	private static Random random = new Random();
 	private static int[] randomValues = new int[3];
-	private static int pivot;
+	private static int pivotIndex;
 	
-	public QuickSorter(String outputFile)
-	{
-		this.outputFile = outputFile;
-	}
+	public QuickSorter() {}
 	
 	/**
 	 * quick sorts an array
@@ -36,7 +32,9 @@ public class QuickSorter
 	{
 		if(leftPosition < rightPosition)
 		{
-			pivot = getPivotValue(numbersToSort);
+			/* get the pivot index and swap the value at pivot index with left position */
+			pivotIndex = getPivotIndex(numbersToSort);
+			swap(numbersToSort, pivotIndex, leftPosition);
 						
 			partitionList(numbersToSort, leftPosition, rightPosition);
 			quickSort(numbersToSort, leftPosition, start-1);
@@ -57,6 +55,8 @@ public class QuickSorter
 		start = leftPosition;
 		int i = leftPosition;
 		end = rightPosition;
+		
+		/* the pivot value is in the leftPosition of the array */
 		int pivot = numbersToSort[leftPosition];
 		
 		
@@ -90,7 +90,7 @@ public class QuickSorter
 	 * @param numbersToSort
 	 * @return the pivot value
 	 */
-	private int getPivotValue(int[] numbersToSort) 
+	private int getPivotIndex(int[] numbersToSort) 
 	{
 		for(int i = 0; i < 3; i++)
 		{
@@ -107,7 +107,17 @@ public class QuickSorter
 		if(randomValues[0] < randomValues[1])
 			swap(randomValues, 0, 1);
 		
-		/* return the median value of the 3 integer number list */
-		return randomValues[1];
+		int pivotIndex = 0;
+		boolean foundPivot = false;
+		for(int i = 0; (i <= numbersToSort.length-1) && !foundPivot; i++)
+		{
+			if(numbersToSort[i] == randomValues[1])
+			{
+				pivotIndex = i;
+				foundPivot = true;
+			}
+		}
+		
+		return pivotIndex;
 	}
 }

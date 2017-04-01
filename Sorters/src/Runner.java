@@ -32,29 +32,36 @@ public class Runner
 		
 		for(String key : listOfNumbers.keySet())
 		{
-			if(key.contains("small_list/unsorted"))
+			if(key.contains("large_list/sorted_smallest_largest"))
 			{
-				
 				/* get the start index of the array and the end index */
 				int lowerEnd = 0;
 				int upperEnd = listOfNumbers.get(key).length-1;
 				
-				System.out.println("Before: ");
+				System.out.println("Before: " + key);
 				for(int i = 0; i < 20; i++)
 				{
 					System.out.print(listOfNumbers.get(key)[i] + ", ");
 				}
 				
-				QuickSorter quickSorter = new QuickSorter("output.txt");
+				QuickSorter quickSorter = new QuickSorter();
+				long startTime = System.nanoTime();
 				quickSorter.quickSort(listOfNumbers.get(key), lowerEnd, upperEnd);
+				long endTime = System.nanoTime();
+				long duration = endTime-startTime;
 				
+				System.out.print("\nDuration (ns): " + duration);
 				System.out.println("\nAfter: ");
 				for(int i = 0; i < 20; i++)
 				{
 					System.out.print(listOfNumbers.get(key)[i] + ", ");
 				}
-				break; // TODO: only want to run the first one to see results before continuing
+				
+				System.out.println("\n\n");
+				
 			}
+				
+				
 		}
 	}
 
