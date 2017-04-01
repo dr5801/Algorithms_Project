@@ -2,6 +2,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 /**
  * 
@@ -12,77 +13,45 @@ import java.util.Random;
  */
 public class QuickSorter 
 {
-	private static int start;
-	private static int end;
-	private static Random random = new Random();
-	private static int[] randomValues = new int[3];
-	private static int pivotIndex;
-	
 	public QuickSorter() {}
 	
 	/**
 	 * quick sorts an array
 	 * 
 	 * @param numbersToSort
-	 * @param rightPosition 
-	 * @param leftPosition 
+	 * @param upperEnd 
+	 * @param lowerEnd 
 	 * @param outputFile
 	 */
-	public void quickSort(int[] numbersToSort, int leftPosition, int rightPosition)
+	public ArrayList<Integer> quickSort(ArrayList<Integer> numbersToSort, int lowerEnd, int upperEnd)
 	{
-		if(leftPosition < rightPosition)
+		if(lowerEnd < upperEnd)
 		{
 			/* get the pivot index and swap the value at pivot index with left position */
-			pivotIndex = getPivotIndex(numbersToSort);
-			swap(numbersToSort, pivotIndex, leftPosition);
-						
-			partitionList(numbersToSort, leftPosition, rightPosition);
-			quickSort(numbersToSort, leftPosition, start-1);
-			quickSort(numbersToSort, end+1, rightPosition);
+			int pivot = getPivot(numbersToSort, lowerEnd, upperEnd);
+			
+			Partition partition = new Partition();
+			ArrayList<Integer> listOfNumbers = partition.partitionList(numbersToSort, lowerEnd, upperEnd, pivot);
+			
+			quickSort(listOfNumbers, partition.getEnd(), upperEnd);
+			quickSort(listOfNumbers, lowerEnd, partition.getStart()-1);
 		}
+		
+		return numbersToSort;
 	}
 
 	/**
-	 * partitions the array passed in based on the Dutch Flag 3-way partition
+	 * swap values at indexes in the list
 	 * 
-	 * @param numbersToSort
-	 * @param startPosition
-	 * @param endPosition
-	 * @param endPosition 
+	 * @param list
+	 * @param valueAtIndex1
+	 * @param valueAtIndex2
 	 */
-	private void partitionList(int[] numbersToSort, int leftPosition, int rightPosition) 
+	private void swap(ArrayList<Integer> list, int valueAtIndex1, int valueAtIndex2)
 	{
-		start = leftPosition;
-		int i = leftPosition;
-		end = rightPosition;
-		
-		/* the pivot value is in the leftPosition of the array */
-		int pivot = numbersToSort[leftPosition];
-		
-		
-		while(i <= end)
-		{
-			if(numbersToSort[i] < pivot)
-			{
-				swap(numbersToSort, i++, start++);
-			}
-			else if(numbersToSort[i] > pivot)
-			{
-				swap(numbersToSort, i, end--);
-			}
-			else
-			{
-				i++;
-			}
-		}
-	}
-
-	/* swaps values in numbers to sort array */
-	private void swap(int[] list, int valueAtIndex1, int valueAtIndex2) 
-	{
-		int temp = list[valueAtIndex1];
-		list[valueAtIndex1] = list[valueAtIndex2];
-		list[valueAtIndex2] = temp;
+		int temp = list.get(valueAtIndex1);
+		list.set(valueAtIndex1, list.get(valueAtIndex2));
+		list.set(valueAtIndex2, temp);
 	}
 
 	/**
@@ -90,34 +59,19 @@ public class QuickSorter
 	 * @param numbersToSort
 	 * @return the pivot value
 	 */
-	private int getPivotIndex(int[] numbersToSort) 
+	public int getPivot(ArrayList<Integer> numbersToSort, int lowerEnd, int upperEnd) 
 	{
-		for(int i = 0; i < 3; i++)
-		{
-			int randomlyChosenValue = random.nextInt(numbersToSort.length);
-			randomValues[i] = randomlyChosenValue;
-		}
+		int medianIndex = (upperEnd - lowerEnd)/2 + lowerEnd;
+		ArrayList<Integer> threeValues = new ArrayList<Integer>();
+		threeValues.add(numbersToSort.get(lowerEnd));
+		threeValues.add(numbersToSort.get(medianIndex));
+		threeValues.add(numbersToSort.get(upperEnd));
 		
-		if(randomValues[0] > randomValues[1])
-			swap(randomValues, 0, 1);
+		/* sort the 3 values to have the medium index at position 1 between 0..2 */
+		if(threeValues.get(0) > threeValues.get(1)) swap(threeValues, 0, 1);
+		if(threeValues.get(1) > threeValues.get(2)) swap(threeValues, 1, 2);
+		if(threeValues.get(0) > threeValues.get(1)) swap(threeValues, 0, 1);
 		
-		if(randomValues[1] > randomValues[2])
-			swap(randomValues, 1, 2);
-		
-		if(randomValues[0] < randomValues[1])
-			swap(randomValues, 0, 1);
-		
-		int pivotIndex = 0;
-		boolean foundPivot = false;
-		for(int i = 0; (i <= numbersToSort.length-1) && !foundPivot; i++)
-		{
-			if(numbersToSort[i] == randomValues[1])
-			{
-				pivotIndex = i;
-				foundPivot = true;
-			}
-		}
-		
-		return pivotIndex;
+		return threeValues.get(1);
 	}
 }

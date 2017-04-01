@@ -1,6 +1,9 @@
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -14,7 +17,7 @@ import java.util.Scanner;
 public class Runner 
 {
 	public static ArrayList<String> directories;
-	private static HashMap<String, int[]> listOfNumbers;
+	private static HashMap<String, ArrayList<Integer>> listOfNumbers;
 	private static final int numFilesPerDir = 30;
 	
 	/**
@@ -25,23 +28,19 @@ public class Runner
 	 */
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		
-		
 		fillListOfDirectories();
 		generateFullFilePaths();
 		
 		for(String key : listOfNumbers.keySet())
 		{
-			if(key.contains("large_list/sorted_smallest_largest"))
-			{
 				/* get the start index of the array and the end index */
 				int lowerEnd = 0;
-				int upperEnd = listOfNumbers.get(key).length-1;
+				int upperEnd = listOfNumbers.get(key).size()-1;
 				
 				System.out.println("Before: " + key);
 				for(int i = 0; i < 20; i++)
 				{
-					System.out.print(listOfNumbers.get(key)[i] + ", ");
+					System.out.print(listOfNumbers.get(key).get(i) + ", ");
 				}
 				
 				QuickSorter quickSorter = new QuickSorter();
@@ -54,14 +53,10 @@ public class Runner
 				System.out.println("\nAfter: ");
 				for(int i = 0; i < 20; i++)
 				{
-					System.out.print(listOfNumbers.get(key)[i] + ", ");
+					System.out.print(listOfNumbers.get(key).get(i) + ", ");
 				}
 				
 				System.out.println("\n\n");
-				
-			}
-				
-				
 		}
 	}
 
@@ -71,7 +66,7 @@ public class Runner
 	 */
 	private static void generateFullFilePaths() throws FileNotFoundException 
 	{
-		listOfNumbers = new HashMap<String, int[]>();
+		listOfNumbers = new HashMap<String, ArrayList<Integer>>();
 		for(String dir : directories)
 		{
 			for(int fileNum = 1; fileNum <= numFilesPerDir; fileNum++)
@@ -102,30 +97,14 @@ public class Runner
 	 */
 	private static void readFromFiles(String file_path, String dir) throws FileNotFoundException 
 	{
-		int[] numbersArray;
+		ArrayList<Integer> numbersArray = new ArrayList<Integer>();
 		int numberOfEntries;
 		
-		if(file_path.contains("small_list"))
-		{
-			numberOfEntries = 10000;
-			numbersArray = new int[numberOfEntries];
-		}
-		else if(file_path.contains("medium_list"))
-		{
-			numberOfEntries = 100000;
-			numbersArray = new int[numberOfEntries];
-		}
-		else 
-		{
-			numberOfEntries = 1000000;
-			numbersArray = new int[numberOfEntries];
-		}
-
 		Scanner numbers = new Scanner(new File(file_path));
 		
 		for(int i = 0; numbers.hasNextLine(); i++)
 		{
-			numbersArray[i] = Integer.parseInt(numbers.nextLine());
+			numbersArray.add(Integer.parseInt(numbers.nextLine()));
 		}
 		
 		listOfNumbers.put(file_path, numbersArray);
