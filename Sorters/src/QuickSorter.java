@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -11,27 +12,36 @@ import java.util.Random;
  */
 public class QuickSorter 
 {
-	private int start;
-	private int end;
+	private static int start;
+	private static int end;
+	private String outputFile;
+	private static Random random = new Random();
+	private static int[] randomValues = new int[3];
+	private static int pivot;
+	
+	public QuickSorter(String outputFile)
+	{
+		this.outputFile = outputFile;
+	}
 	
 	/**
 	 * quick sorts an array
 	 * 
 	 * @param numbersToSort
-	 * @param upperEnd 
-	 * @param lowerEnd 
+	 * @param rightPosition 
+	 * @param leftPosition 
 	 * @param outputFile
 	 */
-	public void quickSort(ArrayList<Integer> numbersToSort, int lowerEnd, int upperEnd, String outputFile)
+	public void quickSort(int[] numbersToSort, int leftPosition, int rightPosition)
 	{
-		if(lowerEnd <= upperEnd)
+		if(leftPosition < rightPosition)
 		{
-			int pivot = getPivotValue(numbersToSort);
-			paritionArray(numbersToSort, pivot, lowerEnd, upperEnd);
-			
-			quickSort(numbersToSort, lowerEnd, this.start, outputFile);
-			quickSort(numbersToSort, this.end+1, upperEnd, outputFile);
-		}	
+			pivot = getPivotValue(numbersToSort);
+						
+			partitionList(numbersToSort, leftPosition, rightPosition);
+			quickSort(numbersToSort, leftPosition, start-1);
+			quickSort(numbersToSort, end+1, rightPosition);
+		}
 	}
 
 	/**
@@ -42,37 +52,37 @@ public class QuickSorter
 	 * @param endPosition
 	 * @param endPosition 
 	 */
-	private void paritionArray(ArrayList<Integer> numbersToSort, int pivot, int startPosition, int endPosition) 
+	private void partitionList(int[] numbersToSort, int leftPosition, int rightPosition) 
 	{
-		start = 0;
-		end = 0;
-		int n = numbersToSort.size() - 1;
+		start = leftPosition;
+		int i = leftPosition;
+		end = rightPosition;
+		int pivot = numbersToSort[leftPosition];
 		
-		while(end <= n)
+		
+		while(i <= end)
 		{
-			if(numbersToSort.get(end) < pivot)
+			if(numbersToSort[i] < pivot)
 			{
-				swap(numbersToSort, start, end);
-				start++;
-				end++;
+				swap(numbersToSort, i++, start++);
 			}
-			else if(numbersToSort.get(end) > pivot)
+			else if(numbersToSort[i] > pivot)
 			{
-				swap(numbersToSort, end, n);
+				swap(numbersToSort, i, end--);
 			}
 			else
 			{
-				end++;
+				i++;
 			}
 		}
 	}
 
 	/* swaps values in numbers to sort array */
-	private void swap(ArrayList<Integer> numbersToSort, int valueAtIndex1, int valueAtIndex2) 
+	private void swap(int[] list, int valueAtIndex1, int valueAtIndex2) 
 	{
-		int temp = numbersToSort.get(valueAtIndex1);
-		numbersToSort.set(valueAtIndex1, numbersToSort.get(valueAtIndex2));
-		numbersToSort.set(valueAtIndex2, temp);		
+		int temp = list[valueAtIndex1];
+		list[valueAtIndex1] = list[valueAtIndex2];
+		list[valueAtIndex2] = temp;
 	}
 
 	/**
@@ -80,19 +90,24 @@ public class QuickSorter
 	 * @param numbersToSort
 	 * @return the pivot value
 	 */
-	private int getPivotValue(ArrayList<Integer> numbersToSort) 
+	private int getPivotValue(int[] numbersToSort) 
 	{
-		int[] values = new int[3];
-		Random randomValue = new Random();
-		
 		for(int i = 0; i < 3; i++)
 		{
-			values[i] = numbersToSort.get(randomValue.nextInt(numbersToSort.size()));
+			int randomlyChosenValue = random.nextInt(numbersToSort.length);
+			randomValues[i] = randomlyChosenValue;
 		}
 		
-		Arrays.sort(values);
+		if(randomValues[0] > randomValues[1])
+			swap(randomValues, 0, 1);
 		
-		/* return the median value */
-		return values[1];
+		if(randomValues[1] > randomValues[2])
+			swap(randomValues, 1, 2);
+		
+		if(randomValues[0] < randomValues[1])
+			swap(randomValues, 0, 1);
+		
+		/* return the median value of the 3 integer number list */
+		return randomValues[1];
 	}
 }
