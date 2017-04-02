@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,6 +19,7 @@ public class Runner
 {
 	public static ArrayList<String> directories;
 	private static HashMap<String, ArrayList<Integer>> listOfNumbers;
+	private static List<TimeContainer> listOfTimes;
 	private static final int numFilesPerDir = 30;
 	
 	/**
@@ -28,36 +30,37 @@ public class Runner
 	 */
 	public static void main(String[] args) throws FileNotFoundException
 	{
+		listOfTimes = new ArrayList<TimeContainer>();
 		fillListOfDirectories();
 		generateFullFilePaths();
 		
-		for(String key : listOfNumbers.keySet())
+		for(String file : listOfNumbers.keySet())
 		{
-				/* get the start index of the array and the end index */
-				int lowerEnd = 0;
-				int upperEnd = listOfNumbers.get(key).size()-1;
-				
-				System.out.println("Before: " + key);
-				for(int i = 0; i < 20; i++)
-				{
-					System.out.print(listOfNumbers.get(key).get(i) + ", ");
-				}
-				
-				QuickSorter quickSorter = new QuickSorter();
-				long startTime = System.nanoTime();
-				quickSorter.quickSort(listOfNumbers.get(key), lowerEnd, upperEnd);
-				long endTime = System.nanoTime();
-				long duration = endTime-startTime;
-				
-				System.out.print("\nDuration (ns): " + duration);
-				System.out.println("\nAfter: ");
-				for(int i = 0; i < 20; i++)
-				{
-					System.out.print(listOfNumbers.get(key).get(i) + ", ");
-				}
-				
-				System.out.println("\n\n");
+			doQuickSort(file, listOfNumbers.get(file));
 		}
+	}
+
+	/**
+	 * Calls the differrent sorts to sort the file
+	 * 
+	 * @param file
+	 * @param arrayList
+	 */
+	private static void doQuickSort(String file, ArrayList<Integer> numbersToSort) 
+	{
+		String algorithm = "QuickSort";
+		int lowerEnd = 0;
+		int upperEnd = numbersToSort.size()-1;
+		
+		QuickSorter quickSorter = new QuickSorter();
+		
+		double startTime = System.currentTimeMillis();
+		quickSorter.quickSort(numbersToSort, lowerEnd, upperEnd);
+		double endTime = System.currentTimeMillis();
+		double duration = endTime - startTime;
+		
+		TimeContainer timeContainer = new TimeContainer(algorithm, file, duration);
+		listOfTimes.add(timeContainer);
 	}
 
 	/**
