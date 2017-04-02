@@ -1,3 +1,4 @@
+package sharedClasses;
 /**
  * @author drew
  *

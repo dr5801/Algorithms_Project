@@ -5,6 +5,8 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import quicksort.QuickSorter;
+
 /**
  * Tests quicksorter class
  * 

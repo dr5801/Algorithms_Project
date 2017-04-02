@@ -1,3 +1,4 @@
+package sharedClasses;
 import java.util.ArrayList;
 
 /**

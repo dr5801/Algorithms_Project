@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import quicksort.QuickSorter;
+import sharedClasses.TimeContainer;
+
 /**
  * 
  * @author Drew Rife
