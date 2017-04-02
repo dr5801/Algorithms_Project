@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import mergesort.MergeSorter;
 import quicksort.QuickSorter;
 import sharedClasses.TimeContainer;
 
@@ -39,12 +40,39 @@ public class Runner
 		
 		for(String file : listOfNumbers.keySet())
 		{
-			doQuickSort(file, listOfNumbers.get(file));
+//			doQuickSort(file, listOfNumbers.get(file));
+			doMergeSort(file, listOfNumbers.get(file));
 		}
 	}
 
 	/**
-	 * Calls the differrent sorts to sort the file
+	 * does the mergesort algorithm
+	 *  
+	 * @param file
+	 * @param arrayList
+	 */
+	private static void doMergeSort(String file, ArrayList<Integer> numbersToSort) 
+	{
+		String algorithm = "MergeSort";
+		int[] listToSort = numbersToSort.stream().mapToInt(i -> i).toArray();
+		System.out.println("\n\n\n");
+		for(int i = 0; i < 20; i++)
+		{
+			System.out.print(listToSort[i] + ", ");
+		}
+		
+		MergeSorter mergeSort = new MergeSorter();
+		mergeSort.sort(listToSort);
+		
+		System.out.println("");
+		for(int i = 0; i < 20; i++)
+		{
+			System.out.print(listToSort[i] + ", ");
+		}
+	}
+
+	/**
+	 * does the quicksort algorithm
 	 * 
 	 * @param file
 	 * @param arrayList
