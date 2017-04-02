@@ -41,5 +41,14 @@ public class TimeContainer
 	{
 		return executionTime;
 	}
+	
+	/**
+	 * returns the algorithm, filename, and the execution time as a string
+	 */
+	@Override
+	public String toString()
+	{
+		return (this.algorithm + "," + this.fileName + "," + this.executionTime);
+	}
 
 }

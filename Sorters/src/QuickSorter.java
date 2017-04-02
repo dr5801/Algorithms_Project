@@ -1,8 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.IntStream;
 
 /**
  * 
@@ -13,10 +9,8 @@ import java.util.stream.IntStream;
  */
 public class QuickSorter 
 {
-	public QuickSorter() {}
-	
 	/**
-	 * quick sorts an array
+	 * quick sorts a list
 	 * 
 	 * @param numbersToSort
 	 * @param upperEnd 
@@ -27,31 +21,18 @@ public class QuickSorter
 	{
 		if(lowerEnd < upperEnd)
 		{
-			/* get the pivot index and swap the value at pivot index with left position */
+			/* get the pivot value */
 			int pivot = getPivot(numbersToSort, lowerEnd, upperEnd);
 			
+			/* create a new partition for the past in list */
 			Partition partition = new Partition();
 			ArrayList<Integer> listOfNumbers = partition.partitionList(numbersToSort, lowerEnd, upperEnd, pivot);
 			
+			/* recursively sort the list */
 			quickSort(listOfNumbers, partition.getEnd(), upperEnd);
 			quickSort(listOfNumbers, lowerEnd, partition.getStart()-1);
 		}
-		
 		return numbersToSort;
-	}
-
-	/**
-	 * swap values at indexes in the list
-	 * 
-	 * @param list
-	 * @param valueAtIndex1
-	 * @param valueAtIndex2
-	 */
-	private void swap(ArrayList<Integer> list, int valueAtIndex1, int valueAtIndex2)
-	{
-		int temp = list.get(valueAtIndex1);
-		list.set(valueAtIndex1, list.get(valueAtIndex2));
-		list.set(valueAtIndex2, temp);
 	}
 
 	/**
@@ -68,10 +49,15 @@ public class QuickSorter
 		threeValues.add(numbersToSort.get(upperEnd));
 		
 		/* sort the 3 values to have the medium index at position 1 between 0..2 */
-		if(threeValues.get(0) > threeValues.get(1)) swap(threeValues, 0, 1);
-		if(threeValues.get(1) > threeValues.get(2)) swap(threeValues, 1, 2);
-		if(threeValues.get(0) > threeValues.get(1)) swap(threeValues, 0, 1);
+		if(threeValues.get(0) > threeValues.get(1)) 
+			Swapper.swap(threeValues, 0, 1);
 		
-		return threeValues.get(1);
+		if(threeValues.get(1) > threeValues.get(2)) 
+			Swapper.swap(threeValues, 1, 2);
+		
+		if(threeValues.get(0) < threeValues.get(1)) 
+			return threeValues.get(1);
+		else
+			return threeValues.get(0);
 	}
 }

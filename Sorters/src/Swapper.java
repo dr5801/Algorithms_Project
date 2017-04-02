@@ -8,6 +8,13 @@ import java.util.ArrayList;
  */
 public class Swapper 
 {
+	/**
+	 * swaps the values at the given indexes in the list
+	 * 
+	 * @param listOfNumbers
+	 * @param index1
+	 * @param index2
+	 */
 	public static void swap(ArrayList<Integer> listOfNumbers, int index1, int index2)
 	{
 		int temp = listOfNumbers.get(index1);
