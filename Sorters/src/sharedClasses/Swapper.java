@@ -16,10 +16,24 @@ public class Swapper
 	 * @param index1
 	 * @param index2
 	 */
-	public static void swap(ArrayList<Integer> listOfNumbers, int index1, int index2)
+	public static void swapArrayList(ArrayList<Integer> listOfNumbers, int index1, int index2)
 	{
 		int temp = listOfNumbers.get(index1);
 		listOfNumbers.set(index1, listOfNumbers.get(index2));
 		listOfNumbers.set(index2, temp);
+	}
+	
+	/**
+	 * swaps the values within an array
+	 * 
+	 * @param listOfNumbers
+	 * @param index1
+	 * @param index2
+	 */
+	public static void swapArray(int[] listOfNumbers, int index1, int index2)
+	{
+		int temp = listOfNumbers[index1];
+		listOfNumbers[index1] = listOfNumbers[index2];
+		listOfNumbers[index2] = temp;
 	}
 }

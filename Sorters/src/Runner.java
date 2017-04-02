@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import heapsort.HeapSorter;
 import mergesort.MergeSorter;
 import quicksort.QuickSorter;
 import sharedClasses.TimeContainer;
@@ -41,8 +42,38 @@ public class Runner
 		for(String file : listOfNumbers.keySet())
 		{
 //			doQuickSort(file, listOfNumbers.get(file));
-			doMergeSort(file, listOfNumbers.get(file));
+//			doMergeSort(file, listOfNumbers.get(file));
+			doHeapSort(file, listOfNumbers.get(file));
+			break;
 		}
+	}
+
+	/**
+	 * does the heapsort algorithm
+	 * 
+	 * @param file
+	 * @param arrayList
+	 */
+	private static void doHeapSort(String file, ArrayList<Integer> numbersToSort) 
+	{
+		int[] testArray = {2, 9, 7, 6, 5, 8 , 22, 56};
+		String algorithm = "HeapSort";
+		int[] listToSort = numbersToSort.stream().mapToInt(i -> i).toArray();
+		System.out.println("\n\n\n");
+		for(int i = 0; i < 20; i++)
+		{
+			System.out.print(testArray[i] + ", ");
+		}
+		
+		HeapSorter heapSorter = new HeapSorter();
+		heapSorter.heapSort(testArray);
+		
+		System.out.println("\nAfter:");
+		for(int i = 0; i < 20; i++)
+		{
+			System.out.print(testArray[i] + ", ");
+		}
+		
 	}
 
 	/**
