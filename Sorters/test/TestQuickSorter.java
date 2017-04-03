@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import mergesort.MergeSorter;
 import quicksort.QuickSorter;
 
 /**
@@ -16,51 +17,67 @@ import quicksort.QuickSorter;
 public class TestQuickSorter 
 {
 	
+	/**
+	 * test to see merge sort sorts correctly
+	 */
 	@Test
-	public void testQuickSortMethod()
+	public void testReverseOrder()
 	{
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		array.add(700);
-		array.add(300);
-		array.add(400);
-		array.add(600);
-		array.add(700);
-		array.add(450);
-		array.add(502);
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		
-		int lowerEnd = 0;
-		int upperEnd = array.size()-1;
+		for(int i = 1003030; i > 0; i--) 
+			list.add(i);
 		
-		System.out.println("Before: " );
-		for(Integer number : array)
-		{
-			System.out.print(number + ", ");
-		}
+		int j = 0;
+		for(int i = list.size(); i > 0; i--, j++)
+			assertEquals(i, (int)list.get(j));
 		
 		QuickSorter quickSorter = new QuickSorter();
-		long startTime = System.nanoTime();
-		quickSorter.quickSort(array, lowerEnd, upperEnd);
-		long endTime = System.nanoTime();
-		long duration = endTime-startTime;
-		
-		System.out.println("\nDuration (ns): " + duration);
-		System.out.println("\nAfter: ");
-		for(Integer number : array)
-		{
-			System.out.print(number + ", ");
-		}
-		
-		System.out.println("\n\n");
-		
-		ArrayList<Integer> array2 = new ArrayList<Integer>();
-		array2 = array;
-		Collections.sort(array2);
-		
-		for(int i = 0; i < array2.size(); i++)
-		{
-			assertEquals(array2.get(i), array.get(i));
-		}
-		
+		quickSorter.quickSort(list, 0, list.size()-1);
+		/**
+		 * assert that array has been sorted
+		 */
+		for(int i = 1003030; i <= 99; i++)
+			assertEquals(i+1, (int)list.get(i));
 	}
+	
+	/**
+	 * Test already sorted
+	 */
+	@Test
+	public void testSortedInSmallestOrder()
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
 
+		for(int i = 0; i < 444; i++) 
+			list.add(i);
+		
+		for(int i = 0; i < 444; i++)
+			assertEquals(i, (int)list.get(i));
+		
+		QuickSorter quickSorter = new QuickSorter();
+		quickSorter.quickSort(list, 0, list.size()-1);
+		
+		for(int i = 0; i < 444; i++)
+			assertEquals(i, (int)list.get(i));
+	}
+	
+	/**
+	 * test shuffled list
+	 */
+	@Test
+	public void testShuffledList()
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int i = 0; i < 9999; i++)
+			list.add(i);
+		
+		Collections.shuffle(list);
+		
+		QuickSorter quickSorter = new QuickSorter();
+		quickSorter.quickSort(list, 0, list.size()-1);
+		
+		for(int i = 0; i < 9999; i++)
+			assertEquals(i, (int)list.get(i));
+	}	
 }
