@@ -1,21 +1,21 @@
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import org.junit.Test;
-
 import mergesort.MergeSorter;
+
+
+
 
 /**
  * Tests that merge sort properly merges a list
- * @author drew
  *
+ * @author Drew Rife
  */
 public class TestMergeSorter 
 {
 	/**
-	 * test to see merge sort sorts correctly
+	 * test to see merge sort sorts correctly in reverse order
 	 */
 	@Test
 	public void testReverseOrder()

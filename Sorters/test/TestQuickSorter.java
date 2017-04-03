@@ -1,24 +1,20 @@
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import org.junit.Test;
-
 import mergesort.MergeSorter;
 import quicksort.QuickSorter;
 
 /**
  * Tests quicksorter class
  * 
- * @author drew
+ * @author Drew Rife
  *
  */
 public class TestQuickSorter 
 {
-	
 	/**
-	 * test to see merge sort sorts correctly
+	 * test to see quick sort sorts correctly from reverse order
 	 */
 	@Test
 	public void testReverseOrder()
