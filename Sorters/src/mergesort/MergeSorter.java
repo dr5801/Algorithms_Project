@@ -1,10 +1,5 @@
 package mergesort;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 /**
  * @author Drew Rife
  * 
@@ -17,6 +12,12 @@ public class MergeSorter
 		int[] array = mergeSort(numbersToSort);
 	}
 	
+	/**
+	 * starts the merge sort and sorts the list recursively
+	 * 
+	 * @param arrayA
+	 * @return sorted arrayA
+	 */
 	private int[] mergeSort(int[] arrayA)
 	{
 		if(arrayA.length <= 1) return arrayA;
@@ -33,6 +34,7 @@ public class MergeSorter
 	}
 	
 	/**
+	 * merge b and c into a
 	 * 
 	 * @param arrayA
 	 * @param arrayB
@@ -79,11 +81,5 @@ public class MergeSorter
 	private void copyAToB(int[] arrayA, int[] arrayB)
 	{
 		System.arraycopy(arrayA, 0, arrayB, 0, arrayB.length);
-	}
-	
-	
-	private void printArray(int[] array) {
-		System.out.println("\n");
-		for(int i = 0; i < 20; i++) System.out.print(array[i] + ", ");		
 	}
 }

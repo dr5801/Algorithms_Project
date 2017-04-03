@@ -70,7 +70,6 @@ public class Runner
 		Timer timer = new Timer("MergeSort", file);
 		timer.run(numbersToSort);
 		listOfTimes.add(timer);
-		System.out.println(timer.toString());
 	}
 	
 	/**
