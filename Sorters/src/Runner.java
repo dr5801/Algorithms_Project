@@ -12,6 +12,7 @@ import heapsort.HeapSorter;
 import mergesort.MergeSorter;
 import quicksort.QuickSorter;
 import sharedClasses.TimeContainer;
+import sharedClasses.Timer;
 
 /**
  * 
@@ -22,9 +23,10 @@ import sharedClasses.TimeContainer;
  */
 public class Runner 
 {
+	private static Timer timer;
 	public static ArrayList<String> directories;
 	private static HashMap<String, ArrayList<Integer>> listOfNumbers;
-	private static List<TimeContainer> listOfTimes;
+	private static List<Timer> listOfTimes;
 	private static final int numFilesPerDir = 30;
 	
 	/**
@@ -35,86 +37,56 @@ public class Runner
 	 */
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		listOfTimes = new ArrayList<TimeContainer>();
+		listOfTimes = new ArrayList<Timer>();
 		fillListOfDirectories();
 		generateFullFilePaths();
 		
 		for(String file : listOfNumbers.keySet())
 		{
-//			doQuickSort(file, listOfNumbers.get(file));
-//			doMergeSort(file, listOfNumbers.get(file));
-			doHeapSort(file, listOfNumbers.get(file));
+			
+			recordQuickSortResults(file, listOfNumbers.get(file));
+			recordMergeSortResults(file, listOfNumbers.get(file));
+			recordHeapSortResults(file, listOfNumbers.get(file));
 		}
 	}
 
 	/**
-	 * does the heapsort algorithm
-	 * 
+	 * creates a new timer object that runs and records the sorter specified in the constructor
 	 * @param file
-	 * @param arrayList
+	 * @param numbersToSort
 	 */
-	private static void doHeapSort(String file, ArrayList<Integer> numbersToSort) 
+	private static void recordQuickSortResults(String file, ArrayList<Integer> numbersToSort) 
 	{
-		String algorithm = "HeapSort";
-		int[] listToSort = numbersToSort.stream().mapToInt(i -> i).toArray();
-		System.out.println("\n\n\n");
-		for(int i = 0; i < 20; i++)
-		{
-			System.out.print(listToSort[i] + ", ");
-		}
-		
-		HeapSorter heapSorter = new HeapSorter();
-		listToSort = heapSorter.heapSort(listToSort);
-		
-		System.out.println("\nAfter:");
-		for(int i = 0; i < 20; i++)
-		{
-			System.out.print(listToSort[i] + ", ");
-		}
-		
+		Timer timer = new Timer("QuickSort", file);
+		timer.run(numbersToSort);
+		listOfTimes.add(timer);
+		System.out.println(timer.getAlgorithm() + ", " + timer.getDuration());
 	}
-
+	
 	/**
-	 * does the mergesort algorithm
-	 *  
+	 * creates a new timer object that runs and records the sorter specified in the constructor
 	 * @param file
-	 * @param arrayList
+	 * @param numbersToSort
 	 */
-	private static void doMergeSort(String file, ArrayList<Integer> numbersToSort) 
+	private static void recordMergeSortResults(String file, ArrayList<Integer> numbersToSort)
 	{
-		String algorithm = "MergeSort";
-		int[] listToSort = numbersToSort.stream().mapToInt(i -> i).toArray();
-		System.out.println("\n\n\n");
-		for(int i = 0; i < 20; i++)
-		{
-			System.out.print(listToSort[i] + ", ");
-		}
-		
-		MergeSorter mergeSort = new MergeSorter();
-		mergeSort.sort(listToSort);
+		Timer timer = new Timer("MergeSort", file);
+		timer.run(numbersToSort);
+		listOfTimes.add(timer);
+		System.out.println(timer.getAlgorithm() + ", " + timer.getDuration());
 	}
-
+	
 	/**
-	 * does the quicksort algorithm
-	 * 
+	 * creates a new timer object that runs and records the sorter specified in the constructor
 	 * @param file
-	 * @param arrayList
+	 * @param numbersToSort
 	 */
-	private static void doQuickSort(String file, ArrayList<Integer> numbersToSort) 
+	private static void recordHeapSortResults(String file, ArrayList<Integer> numbersToSort)
 	{
-		String algorithm = "QuickSort";
-		int lowerEnd = 0;
-		int upperEnd = numbersToSort.size()-1;
-		
-		QuickSorter quickSorter = new QuickSorter();
-		
-		double startTime = System.currentTimeMillis();
-		quickSorter.quickSort(numbersToSort, lowerEnd, upperEnd);
-		double endTime = System.currentTimeMillis();
-		double duration = endTime - startTime;
-		
-		TimeContainer timeContainer = new TimeContainer(algorithm, file, duration);
-		listOfTimes.add(timeContainer);
+		Timer timer = new Timer("HeapSort", file);
+		timer.run(numbersToSort);
+		listOfTimes.add(timer);
+		System.out.println(timer.getAlgorithm() + ", " + timer.getDuration());
 	}
 
 	/**

@@ -15,7 +15,6 @@ public class MergeSorter
 	public void sort(int[] numbersToSort)
 	{
 		int[] array = mergeSort(numbersToSort);
-		printArray(array);
 	}
 	
 	private int[] mergeSort(int[] arrayA)
