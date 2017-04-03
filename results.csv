@@ -23,7 +23,7 @@ small_list/unsorted/unsorted_14.txt,QuickSort,2.369218,,HeapSort – Small_List 
 small_list/unsorted/unsorted_27.txt,QuickSort,2.162055,,106.7194403,,103.7048402
 small_list/unsorted/unsorted_29.txt,QuickSort,2.223496,,,,
 small_list/unsorted/unsorted_5.txt,QuickSort,2.149547,,HeapSort – Small_List Sorted L_SAVG (ms),,HeapSort – Medium_List Sorted L_SAVG (ms)
-small_list/unsorted/unsorted_9.txt,QuickSort,2.329886,,102.2184224,,#DIV/0!
+small_list/unsorted/unsorted_9.txt,QuickSort,2.329886,,102.2184224,,100.691285129032
 small_list/unsorted/unsorted_17.txt,QuickSort,2.208678,,,,
 small_list/unsorted/unsorted_24.txt,QuickSort,2.736237,,,,
 small_list/unsorted/unsorted_30.txt,QuickSort,2.401984,,,,
