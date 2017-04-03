@@ -1,16 +1,13 @@
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import heapsort.HeapSorter;
-import mergesort.MergeSorter;
-import quicksort.QuickSorter;
 import sharedClasses.Timer;
 
 /**
@@ -22,11 +19,12 @@ import sharedClasses.Timer;
  */
 public class Runner 
 {
-	private static Timer timer;
 	public static ArrayList<String> directories;
 	private static HashMap<String, ArrayList<Integer>> listOfNumbers;
 	private static List<Timer> listOfTimes;
 	private static final int numFilesPerDir = 30;
+	private static final String resultsDir = "Results/";
+	private static final String resultsFile = "results.csv";
 	
 	/**
 	 * main class to run
@@ -40,11 +38,151 @@ public class Runner
 		fillListOfDirectories();
 		generateFullFilePaths();
 		
+		System.out.print("Running all sorts for each file ...");
 		for(String file : listOfNumbers.keySet())
 		{
 			recordQuickSortResults(file, listOfNumbers.get(file));
 			recordMergeSortResults(file, listOfNumbers.get(file));
 			recordHeapSortResults(file, listOfNumbers.get(file));
+		}
+		System.out.println(" DONE");
+		
+		/* sort the list of times so they print orderly to the file */
+		sortListOfTimes();
+		createResultsDir();
+		writeToOutput();
+	}
+	
+	/**
+	 * sorts the entire list of times by algorithm, then by top level dir, then by it's subdir
+	 */
+	private static void sortListOfTimes() 
+	{
+		sortByAlgorithm();
+	}
+
+
+	/**
+	 * sorts by algorithm
+	 */
+	private static void sortByAlgorithm() 
+	{
+		ArrayList<Timer> quickSort = new ArrayList<Timer>();
+		ArrayList<Timer> mergeSort = new ArrayList<Timer>();
+		ArrayList<Timer> heapSort = new ArrayList<Timer>();
+		
+		/* save all the sorts into their own lists */
+		for(Timer timer : listOfTimes)
+		{
+			switch(timer.getAlgorithm())
+			{
+			case "QuickSort" :
+				quickSort.add(timer);
+				break;
+			case "MergeSort" :
+				mergeSort.add(timer);
+				break;
+			case "HeapSort" :
+				heapSort.add(timer);
+				break;
+			}
+		}
+		listOfTimes.removeAll(listOfTimes);
+		
+		listOfTimes.addAll(sortByDir(quickSort));
+		listOfTimes.addAll(sortByDir(mergeSort));
+		listOfTimes.addAll(sortByDir(heapSort));
+	}
+
+	/**
+	 * sorts by the top level dir
+	 * 
+	 * @param dirsToSort
+	 * @return
+	 */
+	private static ArrayList<Timer> sortByDir(ArrayList<Timer> dirsToSort) 
+	{
+		ArrayList<Timer> small_list = new ArrayList<Timer>();
+		ArrayList<Timer> medium_list = new ArrayList<Timer>();
+		ArrayList<Timer> large_list = new ArrayList<Timer>();
+		
+		for(Timer timer : dirsToSort)
+		{
+			if(timer.getFile().contains("small_list"))
+				small_list.add(timer);
+			else if(timer.getFile().contains("medium_list"))
+				medium_list.add(timer);
+			else
+				large_list.add(timer);
+		}
+		
+		dirsToSort.removeAll(dirsToSort);
+		dirsToSort.addAll(sortSubDir(small_list));
+		dirsToSort.addAll(sortSubDir(medium_list));
+		dirsToSort.addAll(sortSubDir(large_list));
+		
+		return dirsToSort;
+	}
+
+	/**
+	 * sorts by next level subdir 
+	 * 
+	 * @param list
+	 * @return
+	 */
+	private static ArrayList<Timer> sortSubDir(ArrayList<Timer> list) 
+	{
+		ArrayList<Timer> unsorted = new ArrayList<Timer>();
+		ArrayList<Timer> sorted_S_L = new ArrayList<Timer>();
+		ArrayList<Timer> sorted_L_S = new ArrayList<Timer>();
+		
+		for(Timer timer : list)
+		{
+			if(timer.getFile().contains("unsorted"))
+				unsorted.add(timer);
+			else if(timer.getFile().contains("sorted_smallest_largest"))
+				sorted_S_L.add(timer);
+			else
+				sorted_L_S.add(timer);
+		}
+		
+		list.removeAll(list);
+		list.addAll(unsorted);
+		list.addAll(sorted_S_L);
+		list.addAll(sorted_L_S);
+		
+		return list;
+	}
+
+	/**
+	 * @throws FileNotFoundException 
+	 * 
+	 */
+	private static void writeToOutput() throws FileNotFoundException 
+	{
+		System.out.print("Writing to file ... ");
+		PrintWriter pw = new PrintWriter(new File(resultsDir+resultsFile));
+		for(Timer timer : listOfTimes)
+		{
+			pw.append(timer.toString() + "\n");
+			pw.flush();
+		}
+		System.out.println("DONE");
+		
+	}
+
+
+	private static void createResultsDir() throws FileNotFoundException 
+	{
+		System.out.println("Writing results to : " + resultsDir + resultsFile);
+		
+		File dir = new File(resultsDir);
+		if(!dir.exists())
+		{
+			System.out.println("\n" + resultsDir + " does not exist.");
+			System.out.print("Creating ... ");
+			dir.mkdir();
+			System.out.println("DONE");
 		}
 	}
 
@@ -122,13 +260,12 @@ public class Runner
 	private static void readFromFiles(String file_path, String dir) throws FileNotFoundException 
 	{
 		ArrayList<Integer> numbersArray = new ArrayList<Integer>();
-		int numberOfEntries;
 		
 		Scanner numbers = new Scanner(new File(file_path));
 		
-		for(int i = 0; numbers.hasNextLine(); i++)
+		while(numbers.hasNextLine())
 		{
-			numbersArray.add(Integer.parseInt(numbers.nextLine()));
+			numbersArray.add(Integer.parseInt((numbers.nextLine())));
 		}
 		
 		listOfNumbers.put(file_path, numbersArray);
