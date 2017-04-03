@@ -33,11 +33,11 @@ public class Partition
 		{
 			if(numbersToSort.get(this.end) < pivot)
 			{
-				Swapper.swapArrayList(numbersToSort, this.start++, this.end++);
+				Swapper.swap(numbersToSort, this.start++, this.end++);
 			}
 			else if(numbersToSort.get(this.end) > pivot)
 			{
-				Swapper.swapArrayList(numbersToSort, this.end, n--);
+				Swapper.swap(numbersToSort, this.end, n--);
 			}
 			else
 			{

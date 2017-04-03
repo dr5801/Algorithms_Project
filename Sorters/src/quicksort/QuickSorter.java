@@ -53,10 +53,10 @@ public class QuickSorter
 		
 		/* sort the 3 values to have the medium index at position 1 between 0..2 */
 		if(threeValues.get(0) > threeValues.get(1)) 
-			Swapper.swapArrayList(threeValues, 0, 1);
+			Swapper.swap(threeValues, 0, 1);
 		
 		if(threeValues.get(1) > threeValues.get(2)) 
-			Swapper.swapArrayList(threeValues, 1, 2);
+			Swapper.swap(threeValues, 1, 2);
 		
 		if(threeValues.get(0) < threeValues.get(1)) 
 			return threeValues.get(1);

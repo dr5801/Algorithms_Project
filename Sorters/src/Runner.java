@@ -44,7 +44,6 @@ public class Runner
 //			doQuickSort(file, listOfNumbers.get(file));
 //			doMergeSort(file, listOfNumbers.get(file));
 			doHeapSort(file, listOfNumbers.get(file));
-			break;
 		}
 	}
 
@@ -56,22 +55,21 @@ public class Runner
 	 */
 	private static void doHeapSort(String file, ArrayList<Integer> numbersToSort) 
 	{
-		int[] testArray = {2, 9, 7, 6, 5, 8 , 22, 56};
 		String algorithm = "HeapSort";
 		int[] listToSort = numbersToSort.stream().mapToInt(i -> i).toArray();
 		System.out.println("\n\n\n");
-		for(int i = 0; i < 8; i++)
+		for(int i = 0; i < 20; i++)
 		{
-			System.out.print(testArray[i] + ", ");
+			System.out.print(listToSort[i] + ", ");
 		}
 		
 		HeapSorter heapSorter = new HeapSorter();
-		int[] finalArray = heapSorter.heapSort(testArray);
+		listToSort = heapSorter.heapSort(listToSort);
 		
 		System.out.println("\nAfter:");
-		for(int i = 0; i < 8; i++)
+		for(int i = 0; i < 20; i++)
 		{
-			System.out.print(finalArray[i] + ", ");
+			System.out.print(listToSort[i] + ", ");
 		}
 		
 	}

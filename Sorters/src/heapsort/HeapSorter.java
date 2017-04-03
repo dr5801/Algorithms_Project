@@ -10,6 +10,12 @@ import sharedClasses.Swapper;
  */
 public class HeapSorter 
 {
+	/**
+	 * main heap sort function
+	 * 
+	 * @param numbersToSort
+	 * @return listOfMaxKeys which is the sorted list 
+	 */
 	public int[] heapSort(int[] numbersToSort)
 	{
 		int[] listOfMaxKeys = new int[numbersToSort.length];
@@ -34,6 +40,7 @@ public class HeapSorter
 	{
 		
 		boolean hasBeenHeaped = false;
+		/* run for half the length */
 		for(int i = (numbersToSort.length/2)-1; i > -1; i--)
 		{
 			int keyIndex = i;
@@ -58,11 +65,10 @@ public class HeapSorter
 				}
 				else
 				{
-					numbersToSort[keyIndex] = numbersToSort[j];
+					/* swap keyValue if keyValue < numbersToSort[j] */
+					Swapper.swap(numbersToSort, keyIndex, j);
 					keyIndex = j;
 				}
-				
-				numbersToSort[keyIndex] = keyValue;
 			}
 		}
 		
@@ -83,7 +89,7 @@ public class HeapSorter
 		}
 		else
 		{
-			Swapper.swapArray(numbersToSort, 0, numbersToSort.length-1);
+			Swapper.swap(numbersToSort, 0, numbersToSort.length-1);
 			
 			/* make a new array that excludes the max key within numbersToSort */
 			int[] newArray = new int[numbersToSort.length-1];

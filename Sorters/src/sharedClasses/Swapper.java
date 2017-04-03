@@ -16,7 +16,7 @@ public class Swapper
 	 * @param index1
 	 * @param index2
 	 */
-	public static void swapArrayList(ArrayList<Integer> listOfNumbers, int index1, int index2)
+	public static void swap(ArrayList<Integer> listOfNumbers, int index1, int index2)
 	{
 		int temp = listOfNumbers.get(index1);
 		listOfNumbers.set(index1, listOfNumbers.get(index2));
@@ -30,7 +30,7 @@ public class Swapper
 	 * @param index1
 	 * @param index2
 	 */
-	public static void swapArray(int[] listOfNumbers, int index1, int index2)
+	public static void swap(int[] listOfNumbers, int index1, int index2)
 	{
 		int temp = listOfNumbers[index1];
 		listOfNumbers[index1] = listOfNumbers[index2];
