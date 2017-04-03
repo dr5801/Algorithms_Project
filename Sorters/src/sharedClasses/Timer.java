@@ -1,6 +1,8 @@
 package sharedClasses;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import heapsort.HeapSorter;
 import mergesort.MergeSorter;
@@ -141,4 +143,34 @@ public class Timer
 	{
 		return this.file;
 	}
+	
+	@Override 
+	public String toString()
+	{
+		DIRS dirs;
+		String[] filePath = this.file.split("/");
+		
+		String output = this.algorithmToRun + ",";
+		output += filePath[DIRS.SECOND_LEVEL.getValue()] + "/";
+		output += filePath[DIRS.THIRD_LEVEL.getValue()] + "/";
+		output += filePath[DIRS.FILE_NAME.getValue()] + ",";
+		output += this.getDuration();
+		
+		return output;
+	}
+	
+	private enum DIRS {
+		TOP_LEVEL (0), 
+		SECOND_LEVEL (1), 
+		THIRD_LEVEL (2), 
+		FILE_NAME (3);
+	
+		private final int value;
+		DIRS(int value)
+		{
+			this.value = value;
+		}
+		
+		private int getValue() { return value; }
+	};
 }

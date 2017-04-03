@@ -11,7 +11,6 @@ import java.util.Scanner;
 import heapsort.HeapSorter;
 import mergesort.MergeSorter;
 import quicksort.QuickSorter;
-import sharedClasses.TimeContainer;
 import sharedClasses.Timer;
 
 /**
@@ -43,7 +42,6 @@ public class Runner
 		
 		for(String file : listOfNumbers.keySet())
 		{
-			
 			recordQuickSortResults(file, listOfNumbers.get(file));
 			recordMergeSortResults(file, listOfNumbers.get(file));
 			recordHeapSortResults(file, listOfNumbers.get(file));
@@ -60,7 +58,6 @@ public class Runner
 		Timer timer = new Timer("QuickSort", file);
 		timer.run(numbersToSort);
 		listOfTimes.add(timer);
-		System.out.println(timer.getAlgorithm() + ", " + timer.getDuration());
 	}
 	
 	/**
@@ -73,7 +70,7 @@ public class Runner
 		Timer timer = new Timer("MergeSort", file);
 		timer.run(numbersToSort);
 		listOfTimes.add(timer);
-		System.out.println(timer.getAlgorithm() + ", " + timer.getDuration());
+		System.out.println(timer.toString());
 	}
 	
 	/**
@@ -86,7 +83,6 @@ public class Runner
 		Timer timer = new Timer("HeapSort", file);
 		timer.run(numbersToSort);
 		listOfTimes.add(timer);
-		System.out.println(timer.getAlgorithm() + ", " + timer.getDuration());
 	}
 
 	/**
