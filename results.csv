@@ -1,28 +1,28 @@
 FILE,ALGORITHM,DURATION,,QuickSort – Small_List Unsorted Avg (ms),,QuickSort – Medium_List Unsorted Avg (ms)
-small_list/unsorted/unsorted_6.txt,QuickSort,2.531096,,2.36956036666667,,36.583850537037
+small_list/unsorted/unsorted_6.txt,QuickSort,2.531096,,2.36956036666667,,2.3345805
 small_list/unsorted/unsorted_28.txt,QuickSort,2.18633,,,,
 small_list/unsorted/unsorted_21.txt,QuickSort,2.369252,,QuickSort – Small_List Sorted S_L AVG (ms),,QuickSort – Medium_List Sorted S_L AVG (ms)
-small_list/unsorted/unsorted_16.txt,QuickSort,2.34748,,6.95520603333334,,#DIV/0!
+small_list/unsorted/unsorted_16.txt,QuickSort,2.34748,,6.95520603333334,,5.94537233333333
 small_list/unsorted/unsorted_12.txt,QuickSort,2.435397,,,,
 small_list/unsorted/unsorted_20.txt,QuickSort,2.275862,,QuickSort – Small_List Sorted L_S AVG (ms),,QuickSort – Medium_List Sorted L_S AVG (ms)
-small_list/unsorted/unsorted_25.txt,QuickSort,2.331216,,4.59334886666667,,#DIV/0!
+small_list/unsorted/unsorted_25.txt,QuickSort,2.331216,,4.59334886666667,,4.39071513333333
 small_list/unsorted/unsorted_3.txt,QuickSort,2.880251,,,,
 small_list/unsorted/unsorted_7.txt,QuickSort,2.332687,,MergeSort – Small_List Unsorted AVG (ms),,MergeSort – Medium_List Unsorted AVG (ms)
-small_list/unsorted/unsorted_10.txt,QuickSort,2.224394,,0.545335766666667,,#DIV/0!
+small_list/unsorted/unsorted_10.txt,QuickSort,2.224394,,0.545335766666667,,0.544937933333333
 small_list/unsorted/unsorted_19.txt,QuickSort,2.483989,,,,
-small_list/unsorted/unsorted_22.txt,QuickSort,2.509905,,MergeSort – Small_List Sorted S_L AVG (ms),,MergeSort – Small_List Sorted S_L AVG (ms)
-small_list/unsorted/unsorted_2.txt,QuickSort,2.385356,,1.16873436666667,,#DIV/0!
+small_list/unsorted/unsorted_22.txt,QuickSort,2.509905,,MergeSort – Small_List Sorted S_L AVG (ms),,MergeSort – Medium_List Sorted S_L AVG (ms)
+small_list/unsorted/unsorted_2.txt,QuickSort,2.385356,,1.16873436666667,,0.6463852
 small_list/unsorted/unsorted_15.txt,QuickSort,2.312814,,,,
-small_list/unsorted/unsorted_26.txt,QuickSort,2.230089,,MergeSort – Small_List Sorted L_S AVG (ms),,MergeSort – Small_List Sorted L_S AVG (ms)
-small_list/unsorted/unsorted_11.txt,QuickSort,2.157156,,0.545549133333333,,#DIV/0!
+small_list/unsorted/unsorted_26.txt,QuickSort,2.230089,,MergeSort – Small_List Sorted L_S AVG (ms),,MergeSort – Medium_List Sorted L_S AVG (ms)
+small_list/unsorted/unsorted_11.txt,QuickSort,2.157156,,0.545549133333333,,0.536285066666667
 small_list/unsorted/unsorted_8.txt,QuickSort,2.338823,,,,
-small_list/unsorted/unsorted_18.txt,QuickSort,2.411092,,HeapSort – Small_List Unsorted AVG (ms),,HeapSort – Small_List Unsorted AVG (ms)
-small_list/unsorted/unsorted_23.txt,QuickSort,2.416078,,104.1390576,,#DIV/0!
+small_list/unsorted/unsorted_18.txt,QuickSort,2.411092,,HeapSort – Small_List Unsorted AVG (ms),,HeapSort – Mediuml_List Unsorted AVG (ms)
+small_list/unsorted/unsorted_23.txt,QuickSort,2.416078,,104.1390576,,102.348309966667
 small_list/unsorted/unsorted_1.txt,QuickSort,2.63084,,,,
-small_list/unsorted/unsorted_14.txt,QuickSort,2.369218,,HeapSort – Small_List Sorted S_L AVG (ms),,HeapSort – Small_List Sorted S_L AVG (ms)
-small_list/unsorted/unsorted_27.txt,QuickSort,2.162055,,106.7194403,,#DIV/0!
+small_list/unsorted/unsorted_14.txt,QuickSort,2.369218,,HeapSort – Small_List Sorted S_L AVG (ms),,HeapSort – Medium_List Sorted S_L AVG (ms)
+small_list/unsorted/unsorted_27.txt,QuickSort,2.162055,,106.7194403,,103.7048402
 small_list/unsorted/unsorted_29.txt,QuickSort,2.223496,,,,
-small_list/unsorted/unsorted_5.txt,QuickSort,2.149547,,HeapSort – Small_List Sorted L_SAVG (ms),,HeapSort – Small_List Sorted L_SAVG (ms)
+small_list/unsorted/unsorted_5.txt,QuickSort,2.149547,,HeapSort – Small_List Sorted L_SAVG (ms),,HeapSort – Medium_List Sorted L_SAVG (ms)
 small_list/unsorted/unsorted_9.txt,QuickSort,2.329886,,102.2184224,,#DIV/0!
 small_list/unsorted/unsorted_17.txt,QuickSort,2.208678,,,,
 small_list/unsorted/unsorted_24.txt,QuickSort,2.736237,,,,
