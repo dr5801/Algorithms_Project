@@ -32,13 +32,14 @@ public class HeapSorter
 	 */
 	private int[] heapify(int[] numbersToSort) 
 	{
-		boolean hasBeenHeaped = false;
 		
+		boolean hasBeenHeaped = false;
 		for(int i = (numbersToSort.length/2)-1; i > -1; i--)
 		{
 			int keyIndex = i;
 			int keyValue = numbersToSort[keyIndex];
 			
+			hasBeenHeaped = false;
 			while(!hasBeenHeaped && ((2*keyIndex) <= (numbersToSort.length-1)))
 			{
 				int j = (2*keyIndex);

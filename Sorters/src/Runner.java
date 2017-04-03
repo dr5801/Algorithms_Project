@@ -60,18 +60,18 @@ public class Runner
 		String algorithm = "HeapSort";
 		int[] listToSort = numbersToSort.stream().mapToInt(i -> i).toArray();
 		System.out.println("\n\n\n");
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 8; i++)
 		{
 			System.out.print(testArray[i] + ", ");
 		}
 		
 		HeapSorter heapSorter = new HeapSorter();
-		heapSorter.heapSort(testArray);
+		int[] finalArray = heapSorter.heapSort(testArray);
 		
 		System.out.println("\nAfter:");
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 8; i++)
 		{
-			System.out.print(testArray[i] + ", ");
+			System.out.print(finalArray[i] + ", ");
 		}
 		
 	}
