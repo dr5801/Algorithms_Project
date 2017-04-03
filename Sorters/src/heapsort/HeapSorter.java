@@ -21,7 +21,7 @@ public class HeapSorter
 		int[] listOfMaxKeys = new int[numbersToSort.length];
 		numbersToSort = heapify(numbersToSort);
 		
-		for(int i = listOfMaxKeys.length-1; i > -1; i--)
+		for(int i = listOfMaxKeys.length-1; i >= 0; i--)
 		{
 			listOfMaxKeys[i] = numbersToSort[0];
 			numbersToSort = deleteMaxKey(numbersToSort);
@@ -41,7 +41,7 @@ public class HeapSorter
 		
 		boolean hasBeenHeaped = false;
 		/* run for half the length */
-		for(int i = (numbersToSort.length/2)-1; i > -1; i--)
+		for(int i = (numbersToSort.length/2)-1; i >= 0; i--)
 		{
 			int keyIndex = i;
 			int keyValue = numbersToSort[keyIndex];
