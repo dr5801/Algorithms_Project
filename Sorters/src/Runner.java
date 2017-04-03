@@ -162,6 +162,8 @@ public class Runner
 	{
 		System.out.print("Writing to file ... ");
 		PrintWriter pw = new PrintWriter(new File(resultsDir+resultsFile));
+		pw.append("FILE,ALGORITHM,DURATION\n");
+		pw.flush();
 		for(Timer timer : listOfTimes)
 		{
 			pw.append(timer.toString() + "\n");
@@ -177,12 +179,21 @@ public class Runner
 		System.out.println("Writing results to : " + resultsDir + resultsFile);
 		
 		File dir = new File(resultsDir);
+		File file = new File(resultsDir+resultsFile);
+		
+		/* create the directory if it doesn't already exist */
 		if(!dir.exists())
 		{
 			System.out.println("\n" + resultsDir + " does not exist.");
 			System.out.print("Creating ... ");
 			dir.mkdir();
 			System.out.println("DONE");
+		}
+		
+		/* delete the file if it already exists */
+		if(file.exists())
+		{
+			file.delete();
 		}
 	}
 

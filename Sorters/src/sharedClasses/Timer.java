@@ -144,21 +144,23 @@ public class Timer
 		return this.file;
 	}
 	
+	/* overrides to string */
 	@Override 
 	public String toString()
 	{
 		DIRS dirs;
 		String[] filePath = this.file.split("/");
 		
-		String output = this.algorithmToRun + ",";
-		output += filePath[DIRS.SECOND_LEVEL.getValue()] + "/";
+		String output = filePath[DIRS.SECOND_LEVEL.getValue()] + "/";
 		output += filePath[DIRS.THIRD_LEVEL.getValue()] + "/";
 		output += filePath[DIRS.FILE_NAME.getValue()] + ",";
+		output += this.algorithmToRun + ",";
 		output += this.getDuration();
 		
 		return output;
 	}
 	
+	/* enum representing dirs */
 	private enum DIRS {
 		TOP_LEVEL (0), 
 		SECOND_LEVEL (1), 
